@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
-    show CalendarCarousel;
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/classes/event_list.dart';
-import 'package:intl/intl.dart' show DateFormat;
-import 'calendar_detail.dart';
+import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
+    show CalendarCarousel;
 import 'package:iikoto/database/happy_database_provider.dart';
 import 'package:iikoto/services/navigation_service.dart';
 import 'package:iikoto/settings/screen_arguments.dart';
+import 'package:intl/intl.dart' show DateFormat;
 
 class CalendarPage extends StatefulWidget {
   CalendarPage({Key key}) : super(key: key);
@@ -149,16 +148,21 @@ class _CalendarPageState extends State<CalendarPage> {
     );
 
     return new Scaffold(
-        body: Align(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Expanded(flex: 10, child: Container()),
-          Expanded(flex: 1, child: Container(child: _calendarHeader,)),
-          Expanded(flex: 8, child: Container(child: _calendarCarousel,) ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.only(right: 16.0, left: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Container(
+              child: _calendarHeader,
+            ),
+            Container(
+              child: _calendarCarousel,
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

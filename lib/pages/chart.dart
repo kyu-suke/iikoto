@@ -9,12 +9,9 @@ class LineChartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: const Color(0xff262545),
-      child: ListView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          const SizedBox(
-            height: 250,
-          ),
           const Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -33,12 +30,14 @@ class LineChartPage extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 28,
-              right: 28,
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: 28,
+                right: 28,
+              ),
+              child: LineChartArea(),
             ),
-            child: LineChartArea(),
           ),
         ],
       ),
@@ -126,17 +125,15 @@ class LineChartAreaState extends State<LineChartArea> {
           children: <Widget>[
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Expanded(
-                    flex: 3,
-                    child: Container(
-                      child: _chartArea(),
-                    )),
-                Expanded(
-                    flex: 1,
-                    child: Container(
-                      child: _arrowArea(),
-                    )),
+                Container(
+                  child: _chartArea(),
+                ),
+                Container(
+                  child: _arrowArea(),
+                ),
+                SizedBox(height: 30),
               ],
             ),
           ],
@@ -246,12 +243,9 @@ class LineChartAreaState extends State<LineChartArea> {
   Widget _arrowArea() {
     return Container(
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(
-          height: 1,
-        ),
         IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -302,7 +296,7 @@ class LineChartAreaState extends State<LineChartArea> {
         Text(
           month,
           style: TextStyle(
-              color: Colors.white,
+              color: Color(0xff827daa),
               fontSize: 32,
               fontWeight: FontWeight.bold,
               letterSpacing: 2),
