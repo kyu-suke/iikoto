@@ -4,6 +4,7 @@ import 'calendar.dart';
 import 'dart:async';
 import 'package:iikoto/model/happy.dart';
 import 'package:iikoto/database/happy_database_provider.dart';
+import 'package:iikoto/services/count_stream_service.dart';
 
 class CountPage extends StatefulWidget {
   CountPage({Key key}) : super(key: key);
@@ -22,6 +23,7 @@ class _CountPageState extends State<CountPage> {
 
   int _counter = 0;
   String _text = "";
+  final countStreamService =CountStreamService();
 
   void _incrementCounter() async {
     setState(() {
@@ -34,6 +36,7 @@ class _CountPageState extends State<CountPage> {
     final happy = await countHappiesByCreatedAt(DateTime.now());
     setState(() {
       _counter = happy.count;
+      countStreamService.add(_counter);
     });
   }
 

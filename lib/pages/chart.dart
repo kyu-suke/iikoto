@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import "package:intl/intl.dart";
 import 'package:iikoto/database/happy_database_provider.dart';
 import 'package:iikoto/model/happy.dart';
+import "package:intl/intl.dart";
+import 'package:iikoto/services/count_stream_service.dart';
 
 class LineChartPage extends StatelessWidget {
   @override
@@ -51,6 +51,17 @@ class LineChartArea extends StatefulWidget {
 }
 
 class LineChartAreaState extends State<LineChartArea> {
+  final countStreamService = CountStreamService();
+
+  LineChartAreaState() {
+
+    countStreamService.onAdd.listen((value) {
+      print("↓ is listened value!!!");
+      print(value);
+      setPlots();
+    });
+  }
+
   bool isShowingMainData;
 
   DateTime date;
