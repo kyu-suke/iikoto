@@ -7,6 +7,7 @@ import 'package:iikoto/database/happy_database_provider.dart';
 import 'package:iikoto/services/navigation_service.dart';
 import 'package:iikoto/settings/screen_arguments.dart';
 import 'package:intl/intl.dart' show DateFormat;
+import 'package:iikoto/services/count_stream_service.dart';
 
 class CalendarPage extends StatefulWidget {
   CalendarPage({Key key}) : super(key: key);
@@ -19,24 +20,37 @@ class _CalendarPageState extends State<CalendarPage> {
   @override
   void initState() {
     super.initState();
+    plotHappies();
   }
 
+  final countStreamService = CountStreamService();
+
   _CalendarPageState() {
+    countStreamService.registFunction(() {
+      print("↓ is listened value!!!");
+      print("here is calendar.dart");
+      plotHappies();
+    });
+  }
+
+  void plotHappies() {
+    this._markedDateMap = new EventList<Event>();
     getHappies().then((value) => {
-          value.forEach((element) {
-            setState(() {
-              _markedDateMap.add(
-                  DateTime(element.createdAt.year, element.createdAt.month,
-                      element.createdAt.day),
-                  new Event(
-                    date: DateTime(element.createdAt.year,
-                        element.createdAt.month, element.createdAt.day),
-                    id: element.id,
-                    icon: _eventIcon,
-                  ));
-            });
-          }),
+      value.forEach((element) {
+        setState(() {
+          this._markedDateMap.add(
+              DateTime(element.createdAt.year, element.createdAt.month,
+                  element.createdAt.day),
+              new Event(
+                date: DateTime(element.createdAt.year,
+                    element.createdAt.month, element.createdAt.day),
+                id: element.id,
+                icon: _eventIcon,
+              ));
         });
+      }),
+    });
+
   }
 
   DateTime _currentDate = DateTime.now();

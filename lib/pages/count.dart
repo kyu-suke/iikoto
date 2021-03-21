@@ -41,13 +41,18 @@ class _CountPageState extends State<CountPage> {
   }
 
   void _handleText(String e) {
-    setState(() {
-      _text = e;
-    });
+    print("asdfasdf");
+    // _text = e;
+    // setState(() {
+    //   _text = e;
+    // });
   }
 
+  void _setText() {
+    setState(() {});
+  }
   void _incrementCounterWithComment(BuildContext context) async {
-    await showModalBottomSheet<void>(
+    /*await*/ showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
         return Column(
@@ -57,6 +62,7 @@ class _CountPageState extends State<CountPage> {
                 child: Column(
                   children: [
                     TextField(
+                      autofocus: true,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
                       decoration: InputDecoration(
@@ -83,7 +89,10 @@ class _CountPageState extends State<CountPage> {
           ],
         );
       },
-    );
+    ).then((value) => {
+      print("cloooooooooooooooooooooooooosed"),
+      _setText()
+    });
   }
 
   Future<int> getHappyCount() async {

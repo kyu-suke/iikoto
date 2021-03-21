@@ -54,11 +54,10 @@ class LineChartAreaState extends State<LineChartArea> {
   final countStreamService = CountStreamService();
 
   LineChartAreaState() {
-
-    countStreamService.onAdd.listen((value) {
-      print("↓ is listened value!!!");
-      print(value);
-      setPlots();
+    countStreamService.registFunction(() {
+        print("↓ is listened value!!!");
+        print("here is chart.dart");
+        setPlots();
     });
   }
 
