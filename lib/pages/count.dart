@@ -41,11 +41,7 @@ class _CountPageState extends State<CountPage> {
   }
 
   void _handleText(String e) {
-    print("asdfasdf");
-    // _text = e;
-    // setState(() {
-    //   _text = e;
-    // });
+    _text = e;
   }
 
   void _setText() {
